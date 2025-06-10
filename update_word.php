@@ -7,9 +7,7 @@ header("Access-Control-Allow-Headers: Content-Type");
 header('Content-Type: application/json');
 
 session_start();
-
-$user_id = 1;
-
+$user_id = $_SESSION['user_id'];
 $data = json_decode(file_get_contents("php://input"), true);
 
 $id   = $data['id'];

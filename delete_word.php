@@ -7,8 +7,7 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header('Content-Type: application/json');
 session_start();
-
-$user_id = 1; 
+$user_id = $_SESSION['user_id'];
 $id = $_GET['id'];
 
 $stmt = $conn->prepare("DELETE FROM words WHERE id = ? AND user_id = ?");

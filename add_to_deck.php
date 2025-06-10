@@ -13,9 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit();
 }
 session_start();
-
-$user_id = 1; 
-
+$user_id = $_SESSION['user_id'];
 $data = json_decode(file_get_contents("php://input"), true);
 
 $deck_id = $data['deck_id'];

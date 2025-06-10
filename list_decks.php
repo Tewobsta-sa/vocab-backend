@@ -14,10 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 session_start();
-
-
-$user_id = 1;
-
+$user_id = $_SESSION['user_id'];
 $result = $conn->query("SELECT id, title FROM decks WHERE user_id = $user_id");
 $decks = [];
 

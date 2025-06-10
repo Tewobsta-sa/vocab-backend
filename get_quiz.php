@@ -9,7 +9,7 @@ header('Content-Type: application/json');
 
 session_start();
 
-$user_id = 1;
+$user_id = $_SESSION['user_id'];
 $difficulty = $_GET['difficulty'];
 
 
@@ -41,6 +41,7 @@ while ($row = $result->fetch_assoc()) {
     while ($fake = $fakeRes->fetch_assoc()) {
         $fakeDefs[] = $fake['definition'];
     }
+    
 
     $questions[] = [
         'word' => $word,

@@ -14,9 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 session_start();
-
-$user_id = 1;
-
+$user_id = $_SESSION['user_id'];
 $data = json_decode(file_get_contents("php://input"), true);
 
 $word = $data['word'];

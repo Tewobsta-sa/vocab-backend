@@ -6,11 +6,7 @@ header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 session_start();
-
-
-$user_id = 1;
-
-// Get total words
+$user_id = $_SESSION['user_id'];
 $words = $conn->query("SELECT COUNT(*) AS total FROM words WHERE user_id = $user_id")->fetch_assoc();
 
 // Get total decks

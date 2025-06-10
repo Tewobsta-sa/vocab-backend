@@ -9,9 +9,7 @@ header("Access-Control-Allow-Headers: Content-Type");
 header('Content-Type: application/json');
 
 session_start();
-$user_id = 1; // Set to the actual user_id from the session or other source
-
-// Get the input data
+$user_id = $_SESSION['user_id'];
 $data = json_decode(file_get_contents("php://input"), true);
 $deck_id = isset($data['deck_id']) ? intval($data['deck_id']) : 0; // Validate input
 
