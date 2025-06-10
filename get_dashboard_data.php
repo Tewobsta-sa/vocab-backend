@@ -1,11 +1,14 @@
 <?php
 
 require 'db.php';
+header("Access-Control-Allow-Origin: http://10.4.96.116");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 session_start();
-header('Content-Type: application/json');
-if (!isset($_SESSION['user_id'])) exit;
 
-$user_id = $_SESSION['user_id'];
+
+$user_id = 1;
 
 // Get total words
 $words = $conn->query("SELECT COUNT(*) AS total FROM words WHERE user_id = $user_id")->fetch_assoc();

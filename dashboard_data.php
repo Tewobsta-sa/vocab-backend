@@ -13,13 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 session_start();
 header('Content-Type: application/json');
 
-if (!isset($_SESSION['user_id'])) {
-    echo json_encode(["error" => "Unauthorized"]);
-    http_response_code(401);
-    exit;
-}
 
-$user_id = $_SESSION['user_id'];
+
+$user_id = 1;
 
 
 // Total words

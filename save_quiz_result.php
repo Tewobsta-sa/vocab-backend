@@ -1,12 +1,20 @@
 <?php
+require 'db.php';
+// Allow CORS
+header("Access-Control-Allow-Origin: http://10.4.96.116");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+header('Content-Type: application/json');
 session_start();
-if (!isset($_SESSION['user_id'])) exit;
 
-$user_id = $_SESSION['user_id'];
-$score = $_POST['score'];
-$total = $_POST['total'];
+$user_id = 1;
 
-$conn = new mysqli("localhost", "root", "", "vocab_app");
+$data = json_decode(file_get_contents("php://input"), true);
+
+$score = $data['score'];
+$total = $data['total'];
+
 
 $stmt = $conn->prepare("INSERT INTO quiz_results (user_id, score, total_questions) VALUES (?, ?, ?)");
 $stmt->bind_param("iii", $user_id, $score, $total);

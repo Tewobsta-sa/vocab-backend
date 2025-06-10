@@ -1,14 +1,22 @@
 <?php
+require 'db.php';
+header("Access-Control-Allow-Origin: http://10.4.96.116");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+header('Content-Type: application/json');
+
 session_start();
-if (!isset($_SESSION['user_id'])) exit;
 
-$conn = new mysqli("localhost", "root", "", "vocab");
+$user_id = 1;
 
-$id = $_POST['id'];
-$word = $_POST['word'];
-$def = $_POST['definition'];
-$diff = $_POST['difficulty'];
+$data = json_decode(file_get_contents("php://input"), true);
+
+$id   = $data['id'];
+$word = $data['word'];
+$def  = $data['definition'];
+$diff = $data['difficulty'];
 
 $stmt = $conn->prepare("UPDATE words SET word = ?, definition = ?, difficulty = ? WHERE id = ? AND user_id = ?");
-$stmt->bind_param("sssii", $word, $def, $diff, $id, $_SESSION['user_id']);
+$stmt->bind_param("sssii", $word, $def, $diff, $id, $user_id);
 $stmt->execute();

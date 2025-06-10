@@ -2,8 +2,10 @@
 require 'db.php';
 // Allow CORS
 header("Access-Control-Allow-Origin: http://10.4.96.116");
+header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
+header('Content-Type: application/json');
 
 // Handle preflight OPTIONS request
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
@@ -12,13 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 session_start();
-if (!isset($_SESSION['user_id'])) exit;
 
-$user_id = $_SESSION['user_id'];
+$user_id = 1;
 
-$word = $_POST['word'];
-$def = $_POST['definition'];
-$diff = $_POST['difficulty'];
+$data = json_decode(file_get_contents("php://input"), true);
+
+$word = $data['word'];
+$def = $data['definition'];
+$diff = $data['difficulty'];
 
 $stmt = $conn->prepare("INSERT INTO words (user_id, word, definition, difficulty) VALUES (?, ?, ?, ?)");
 $stmt->bind_param("isss", $user_id, $word, $def, $diff);

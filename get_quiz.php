@@ -1,12 +1,17 @@
 <?php
-session_start();
+require 'db.php';
+// Allow CORS
+header("Access-Control-Allow-Origin: http://10.4.96.116");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 header('Content-Type: application/json');
-if (!isset($_SESSION['user_id'])) exit;
 
-$user_id = $_SESSION['user_id'];
+session_start();
+
+$user_id = 1;
 $difficulty = $_GET['difficulty'];
 
-$conn = new mysqli("localhost", "root", "", "vocab_app");
 
 // Select 10 random words of this difficulty
 $result = $conn->query("
